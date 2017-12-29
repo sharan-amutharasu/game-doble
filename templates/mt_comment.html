@@ -1,0 +1,14 @@
+
+#add_to_end: 2017-08-24 08:49:31.772677
+{% extends "base_generic.html" %}
+
+{% block body %}
+	<h1>%(model_name)s List</h1>
+
+	{% if %(model_name)s_list %}
+	<ul>
+	  {% for item in %(model_name)s_list %}
+	  <li>
+		<a href="{{ item.get_absolute_url }}">{{ item.id}}</a>{% for col in item.columns}
+		<p>{{ col.name }}: {{ col.value }}
+#add_to_end: 2017-08-24 08:49:31.772713

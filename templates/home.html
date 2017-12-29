@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+ 
+<html>
+<head>
+    <title>Setup game</title>
+<script>
+
+
+
+//window.onload=page_load;
+
+</script>	
+<style>
+
+#base{
+  width: 100 vw;
+  height: 100 vh;
+  z-index: 1000; position:fixed;
+}
+#options{
+  z-index:-1;relative:
+}
+
+
+</style>
+</head>
+ 
+<body>
+{% load staticfiles %}
+	<div id = "base">
+	<div id = "options">
+	<ul class = "opt">
+		<h1> Let's play dobble! </h1>
+		<li><a href="{% url 'create' %}">Create Game</a></li>
+		{% if user in priv_users %}
+		<li><a href="{% url 'iq' %}">IQ Game</a></li>
+		<li><a href="{% url 'mu_home' %}">Music Game</a></li>
+		{% endif %}
+		<li>Join Game: </li>
+		<h2><b> Two player games: </b></h2>
+			{% if games_list %}
+			<ul class = "games2">
+
+			  {% for game in games_list %}
+			  <li>
+				<a href="{% url 'wait' pk=game.id %}">Game: {{ game.f_game_name }}</a> by: {{ game.f_player1}}
+			  </li>
+			  {% endfor %}
+
+			</ul>
+			{% else %}
+			  <p>No two player games available.</p>
+			{% endif %}       			
+			
+	</ul>
+	</div>
+    <div id="form">
+    </div>
+	</div>
+ 
+ 
+</body>
+</html>

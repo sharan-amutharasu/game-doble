@@ -1,0 +1,572 @@
+
+<html>
+<head>
+    <title>Game id: </title>
+
+<script language="javascript">
+	
+{% autoescape off %}
+
+var deck = ['cr','cg','cb','cy','ca','tr','tg','tb','ty','ta','sr','sg','sb','sy','sa','pr','pg','pb','py','pa','hr','hg','hb','hy','ha'];
+var gv_common =  "none";
+var gv_counter = 0;
+var gv_loaded_images = 0;
+var gv_start_time = new Date();
+//var player_start_time = new Date();
+{% endautoescape %}
+
+function page_load() {
+{% autoescape off %}
+
+  //document.getElementById("test").innerHTML = "tested";
+  shuffle(deck);
+  gv_common = deck[8];
+
+  var var_user = "{{user}}";
+  //var game_id = {{game.id}};
+  //var key_card_no = {{key}};
+  var key_card = deck.slice(0,9);
+  var play_card = deck.slice(8,17);
+ 
+  var set_nos = [0,1,2,3,4,5,6,7,8];
+  var img_sizes = ['78%','74%','70%','68%','64%','60%','58%','54%','50%'];
+  //var img_sizes = ['70%','70%','70%','70%','70%','70%','70%','70%'];
+  shuffle(set_nos);
+  shuffle(img_sizes);
+  document.getElementById("img_ek1").src = "/static/images/iq/".concat(key_card[set_nos[0]],".png");
+  document.getElementById("img_ek1").style.height = img_sizes[0];
+  document.getElementById("img_ek1").style.width = img_sizes[0];
+  document.getElementById("img_ek1").onload = onImageLoad;
+  //document.getElementById("img_ek1").addEventListener("load", onImageLoad);
+
+  //document.getElementById("img_ek1").style.transform = "rotate(90deg)";
+  document.getElementById("img_ek2").src = "/static/images/iq/".concat(key_card[set_nos[1]],".png");
+  document.getElementById("img_ek2").style.height = img_sizes[1];
+  document.getElementById("img_ek2").style.width = img_sizes[1];
+  document.getElementById("img_ek2").onload = onImageLoad;
+  document.getElementById("img_ek3").src = "/static/images/iq/".concat(key_card[set_nos[2]],".png");
+  document.getElementById("img_ek3").style.height = img_sizes[2];
+  document.getElementById("img_ek3").style.width = img_sizes[2];
+  document.getElementById("img_ek3").onload = onImageLoad;
+  document.getElementById("img_ek4").src = "/static/images/iq/".concat(key_card[set_nos[3]],".png");
+  document.getElementById("img_ek4").style.height = img_sizes[3];
+  document.getElementById("img_ek4").style.width = img_sizes[3];
+  document.getElementById("img_ek4").onload = onImageLoad;
+  document.getElementById("img_ek5").src = "/static/images/iq/".concat(key_card[set_nos[4]],".png");
+  document.getElementById("img_ek5").style.height = img_sizes[4];
+  document.getElementById("img_ek5").style.width = img_sizes[4];
+  document.getElementById("img_ek5").onload = onImageLoad;
+  document.getElementById("img_ek6").src = "/static/images/iq/".concat(key_card[set_nos[5]],".png");
+  document.getElementById("img_ek6").style.height = img_sizes[5];
+  document.getElementById("img_ek6").style.width = img_sizes[5];
+  document.getElementById("img_ek6").onload = onImageLoad;
+  document.getElementById("img_ek7").src = "/static/images/iq/".concat(key_card[set_nos[6]],".png");
+  document.getElementById("img_ek7").style.height = img_sizes[6];
+  document.getElementById("img_ek7").style.width = img_sizes[6];
+  document.getElementById("img_ek7").onload = onImageLoad;
+  document.getElementById("img_ek8").src = "/static/images/iq/".concat(key_card[set_nos[7]],".png");
+  document.getElementById("img_ek8").style.height = img_sizes[7];
+  document.getElementById("img_ek8").style.width = img_sizes[7];
+  document.getElementById("img_ek8").onload = onImageLoad;
+  document.getElementById("img_ek9").src = "/static/images/iq/".concat(key_card[set_nos[8]],".png");
+  document.getElementById("img_ek9").style.height = img_sizes[8];
+  document.getElementById("img_ek9").style.width = img_sizes[8];
+  document.getElementById("img_ek9").onload = onImageLoad;
+  
+  //var play_set = {{set1}};
+  //var play_card_no = {{play_card_no}};
+  shuffle(set_nos);
+  shuffle(img_sizes);
+  document.getElementById("img_ep1").src = "/static/images/iq/".concat(play_card[set_nos[0]],".png");
+  document.getElementById("img_ep1").style.height = img_sizes[0];
+  document.getElementById("img_ep1").style.width = img_sizes[0];
+  document.getElementById("img_ep1").onload = onImageLoad;
+  document.getElementById("img_ep2").src = "/static/images/iq/".concat(play_card[set_nos[1]],".png");
+  document.getElementById("img_ep2").style.height = img_sizes[1];
+  document.getElementById("img_ep2").style.width = img_sizes[1];
+  document.getElementById("img_ep2").onload = onImageLoad;
+  document.getElementById("img_ep3").src = "/static/images/iq/".concat(play_card[set_nos[2]],".png");
+  document.getElementById("img_ep3").style.height = img_sizes[2];
+  document.getElementById("img_ep3").style.width = img_sizes[2];
+  document.getElementById("img_ep3").onload = onImageLoad;
+  document.getElementById("img_ep4").src = "/static/images/iq/".concat(play_card[set_nos[3]],".png");
+  document.getElementById("img_ep4").style.height = img_sizes[3];
+  document.getElementById("img_ep4").style.width = img_sizes[3];
+  document.getElementById("img_ep4").onload = onImageLoad;
+  document.getElementById("img_ep5").src = "/static/images/iq/".concat(play_card[set_nos[4]],".png");
+  document.getElementById("img_ep5").style.height = img_sizes[4];
+  document.getElementById("img_ep5").style.width = img_sizes[4];
+  document.getElementById("img_ep5").onload = onImageLoad;
+  document.getElementById("img_ep6").src = "/static/images/iq/".concat(play_card[set_nos[5]],".png");
+  document.getElementById("img_ep6").style.height = img_sizes[5];
+  document.getElementById("img_ep6").style.width = img_sizes[5];
+  document.getElementById("img_ep6").onload = onImageLoad;
+  document.getElementById("img_ep7").src = "/static/images/iq/".concat(play_card[set_nos[6]],".png");
+  document.getElementById("img_ep7").style.height = img_sizes[6];
+  document.getElementById("img_ep7").style.width = img_sizes[6];
+  document.getElementById("img_ep7").onload = onImageLoad;
+  document.getElementById("img_ep8").src = "/static/images/iq/".concat(play_card[set_nos[7]],".png");
+  document.getElementById("img_ep8").style.height = img_sizes[7];
+  document.getElementById("img_ep8").style.width = img_sizes[7];
+  document.getElementById("img_ep8").onload = onImageLoad;
+  document.getElementById("img_ep9").src = "/static/images/iq/".concat(play_card[set_nos[8]],".png");
+  document.getElementById("img_ep9").style.height = img_sizes[8];
+  document.getElementById("img_ep9").style.width = img_sizes[8];
+  document.getElementById("img_ep9").onload = onImageLoad;
+  //gv_common = get_common();
+  //document.getElementById("test").innerHTML = gv_loaded_images;
+  //setTimeout(waitForLoaded,100);
+  
+  //post("{% url 'game2_play' %}", {type:"third", user:var_user, id:game_id, key_card_no:key_card_no, play_card_no:play_card_no });
+
+{% endautoescape %}
+};
+
+const waitForLoaded = function(){
+    if(gv_loaded_images >= 18){
+        //allLoaded = true;   // flag that the image have loaded
+		//document.getElementById("test").innerHTML = gv_loaded_images;
+		var var_user = "{{user}}";
+		//var game_id = {{game.id}};
+		//var key_card_no = {{key}};
+		//var play_card_no = {{play_card_no}};
+		//gv_common = get_common();
+		//post("{% url 'game2_play' %}", {type:"third", user:var_user, id:game_id, key_card_no:key_card_no, play_card_no:play_card_no });
+    }else{
+        // display  the progress here
+        setTimeout(waitForLoaded,100); // try again in 100ms
+    }
+}
+
+function onImageLoad(){ 
+  gv_loaded_images += 1; 
+}
+
+function clickFntn(clicked_id) {
+{% autoescape off %}
+  var clicked = document.getElementById(clicked_id).src;
+  var clicked1 = clicked.replace(/^.*[\\\/]/, '');
+  var clicked2 = clicked1.slice(0,-4);
+  if (clicked2 == gv_common) {
+    var var_user = "{{user}}";
+	//var game_id = {{game.id}};
+	//var key_card_no = {{key}};
+	//var set1 = {{ set1 }};
+    var check_result = 'true';
+	gv_counter += 1;
+	if (gv_counter >= 20) {
+		var end_time = new Date();
+		var play_time = (end_time - gv_start_time)/1000;
+		post("{% url 'iq_end' %}", {type:"first", user:var_user, play_time:play_time});
+	} else {
+		swap(gv_common);
+	}
+	//var play_card_no = {{ play_card_no }};
+	//document.getElementById("test").innerHTML = set1;
+	//post("{% url 'game2_play' %}", {type:"second", user:var_user, id:game_id, key_card_no:key_card_no, play_card_no:play_card_no });
+  } else {
+    var check_result = 'false';
+  }
+{% endautoescape %}
+};
+
+function swap(common) {
+  var key_card = get_play_card();
+  var deck2 = arr_diff(deck, key_card);
+  shuffle(deck2);
+  shuffle(key_card);
+  var play_card = deck2.slice(0,8);
+  play_card.push(key_card[0]);
+  gv_common = key_card[0];
+ 
+  var set_nos = [0,1,2,3,4,5,6,7,8];
+  var img_sizes = ['78%','74%','70%','68%','64%','60%','58%','54%','50%'];
+  //var img_sizes = ['70%','70%','70%','70%','70%','70%','70%','70%'];
+  shuffle(set_nos);
+  shuffle(img_sizes);
+  document.getElementById("img_ek1").src = "/static/images/iq/".concat(key_card[set_nos[0]],".png");
+  document.getElementById("img_ek1").style.height = img_sizes[0];
+  document.getElementById("img_ek1").style.width = img_sizes[0];
+  document.getElementById("img_ek1").onload = onImageLoad;
+  //document.getElementById("img_ek1").addEventListener("load", onImageLoad);
+
+  //document.getElementById("img_ek1").style.transform = "rotate(90deg)";
+  document.getElementById("img_ek2").src = "/static/images/iq/".concat(key_card[set_nos[1]],".png");
+  document.getElementById("img_ek2").style.height = img_sizes[1];
+  document.getElementById("img_ek2").style.width = img_sizes[1];
+  document.getElementById("img_ek2").onload = onImageLoad;
+  document.getElementById("img_ek3").src = "/static/images/iq/".concat(key_card[set_nos[2]],".png");
+  document.getElementById("img_ek3").style.height = img_sizes[2];
+  document.getElementById("img_ek3").style.width = img_sizes[2];
+  document.getElementById("img_ek3").onload = onImageLoad;
+  document.getElementById("img_ek4").src = "/static/images/iq/".concat(key_card[set_nos[3]],".png");
+  document.getElementById("img_ek4").style.height = img_sizes[3];
+  document.getElementById("img_ek4").style.width = img_sizes[3];
+  document.getElementById("img_ek4").onload = onImageLoad;
+  document.getElementById("img_ek5").src = "/static/images/iq/".concat(key_card[set_nos[4]],".png");
+  document.getElementById("img_ek5").style.height = img_sizes[4];
+  document.getElementById("img_ek5").style.width = img_sizes[4];
+  document.getElementById("img_ek5").onload = onImageLoad;
+  document.getElementById("img_ek6").src = "/static/images/iq/".concat(key_card[set_nos[5]],".png");
+  document.getElementById("img_ek6").style.height = img_sizes[5];
+  document.getElementById("img_ek6").style.width = img_sizes[5];
+  document.getElementById("img_ek6").onload = onImageLoad;
+  document.getElementById("img_ek7").src = "/static/images/iq/".concat(key_card[set_nos[6]],".png");
+  document.getElementById("img_ek7").style.height = img_sizes[6];
+  document.getElementById("img_ek7").style.width = img_sizes[6];
+  document.getElementById("img_ek7").onload = onImageLoad;
+  document.getElementById("img_ek8").src = "/static/images/iq/".concat(key_card[set_nos[7]],".png");
+  document.getElementById("img_ek8").style.height = img_sizes[7];
+  document.getElementById("img_ek8").style.width = img_sizes[7];
+  document.getElementById("img_ek8").onload = onImageLoad;
+  document.getElementById("img_ek9").src = "/static/images/iq/".concat(key_card[set_nos[8]],".png");
+  document.getElementById("img_ek9").style.height = img_sizes[8];
+  document.getElementById("img_ek9").style.width = img_sizes[8];
+  document.getElementById("img_ek9").onload = onImageLoad;
+  
+  //var play_set = {{set1}};
+  //var play_card_no = {{play_card_no}};
+  shuffle(set_nos);
+  shuffle(img_sizes);
+  document.getElementById("img_ep1").src = "/static/images/iq/".concat(play_card[set_nos[0]],".png");
+  document.getElementById("img_ep1").style.height = img_sizes[0];
+  document.getElementById("img_ep1").style.width = img_sizes[0];
+  document.getElementById("img_ep1").onload = onImageLoad;
+  document.getElementById("img_ep2").src = "/static/images/iq/".concat(play_card[set_nos[1]],".png");
+  document.getElementById("img_ep2").style.height = img_sizes[1];
+  document.getElementById("img_ep2").style.width = img_sizes[1];
+  document.getElementById("img_ep2").onload = onImageLoad;
+  document.getElementById("img_ep3").src = "/static/images/iq/".concat(play_card[set_nos[2]],".png");
+  document.getElementById("img_ep3").style.height = img_sizes[2];
+  document.getElementById("img_ep3").style.width = img_sizes[2];
+  document.getElementById("img_ep3").onload = onImageLoad;
+  document.getElementById("img_ep4").src = "/static/images/iq/".concat(play_card[set_nos[3]],".png");
+  document.getElementById("img_ep4").style.height = img_sizes[3];
+  document.getElementById("img_ep4").style.width = img_sizes[3];
+  document.getElementById("img_ep4").onload = onImageLoad;
+  document.getElementById("img_ep5").src = "/static/images/iq/".concat(play_card[set_nos[4]],".png");
+  document.getElementById("img_ep5").style.height = img_sizes[4];
+  document.getElementById("img_ep5").style.width = img_sizes[4];
+  document.getElementById("img_ep5").onload = onImageLoad;
+  document.getElementById("img_ep6").src = "/static/images/iq/".concat(play_card[set_nos[5]],".png");
+  document.getElementById("img_ep6").style.height = img_sizes[5];
+  document.getElementById("img_ep6").style.width = img_sizes[5];
+  document.getElementById("img_ep6").onload = onImageLoad;
+  document.getElementById("img_ep7").src = "/static/images/iq/".concat(play_card[set_nos[6]],".png");
+  document.getElementById("img_ep7").style.height = img_sizes[6];
+  document.getElementById("img_ep7").style.width = img_sizes[6];
+  document.getElementById("img_ep7").onload = onImageLoad;
+  document.getElementById("img_ep8").src = "/static/images/iq/".concat(play_card[set_nos[7]],".png");
+  document.getElementById("img_ep8").style.height = img_sizes[7];
+  document.getElementById("img_ep8").style.width = img_sizes[7];
+  document.getElementById("img_ep8").onload = onImageLoad;
+  document.getElementById("img_ep9").src = "/static/images/iq/".concat(play_card[set_nos[8]],".png");
+  document.getElementById("img_ep9").style.height = img_sizes[8];
+  document.getElementById("img_ep9").style.width = img_sizes[8];
+  document.getElementById("img_ep9").onload = onImageLoad;
+}
+
+function arr_diff (a1, a2) {
+
+    var a = [], diff = [];
+
+    for (var i = 0; i < a1.length; i++) {
+        a[a1[i]] = true;
+    }
+
+    for (var i = 0; i < a2.length; i++) {
+        if (a[a2[i]]) {
+            delete a[a2[i]];
+        } else {
+            a[a2[i]] = true;
+        }
+    }
+
+    for (var k in a) {
+        diff.push(k);
+    }
+
+    return diff;
+};
+
+
+function intersect_arrays(a, b) {
+    var sorted_a = a.concat().sort();
+    var sorted_b = b.concat().sort();
+    var common = [];
+    var a_i = 0;
+    var b_i = 0;
+
+    while (a_i < a.length
+           && b_i < b.length)
+    {
+        if (sorted_a[a_i] === sorted_b[b_i]) {
+            common.push(sorted_a[a_i]);
+            a_i++;
+            b_i++;
+        }
+        else if(sorted_a[a_i] < sorted_b[b_i]) {
+            a_i++;
+        }
+        else {
+            b_i++;
+        }
+    }
+    return common;
+};
+
+function get_common(){
+{% autoescape off %}
+  var k1 = document.getElementById("img_ek1").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var k2 = document.getElementById("img_ek2").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var k3 = document.getElementById("img_ek3").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var k4 = document.getElementById("img_ek4").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var k5 = document.getElementById("img_ek5").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var k6 = document.getElementById("img_ek6").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var k7 = document.getElementById("img_ek7").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var k8 = document.getElementById("img_ek8").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var k9 = document.getElementById("img_ek9").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var key_array = [k1, k2, k3, k4, k5, k6, k7, k8, k9];
+  
+  var p1 = document.getElementById("img_ep1").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p2 = document.getElementById("img_ep2").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p3 = document.getElementById("img_ep3").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p4 = document.getElementById("img_ep4").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p5 = document.getElementById("img_ep5").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p6 = document.getElementById("img_ep6").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p7 = document.getElementById("img_ep7").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p8 = document.getElementById("img_ep8").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p9 = document.getElementById("img_ep9").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var play_array = [p1, p2, p3, p4, p5, p6, p7, p8, p9];
+  var common_card = intersect_arrays(key_array, play_array);
+  return common_card;
+{% endautoescape %}
+};
+
+function get_play_card(){
+{% autoescape off %}  
+  var p1 = document.getElementById("img_ep1").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p2 = document.getElementById("img_ep2").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p3 = document.getElementById("img_ep3").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p4 = document.getElementById("img_ep4").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p5 = document.getElementById("img_ep5").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p6 = document.getElementById("img_ep6").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p7 = document.getElementById("img_ep7").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p8 = document.getElementById("img_ep8").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var p9= document.getElementById("img_ep9").src.replace(/^.*[\\\/]/, '').slice(0,-4);
+  var play_array = [p1, p2, p3, p4, p5, p6, p7, p8, p9];
+  return play_array;
+{% endautoescape %}
+}
+
+function post(path, params, method) {
+    method = method || "POST"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.getElementById("form1");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+	//document.getElementById("test").innerHTML = params;
+    form.submit();
+}	
+
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length; i; i--) {
+        j = Math.floor(Math.random() * i);
+        x = a[i - 1];
+        a[i - 1] = a[j];
+        a[j] = x;
+    }
+}
+
+window.onload=page_load;
+
+</script>
+<style>
+
+#base{
+  //width: 1000px;
+  //height: 400px;
+  width: 100 vw;
+  height: 100 vh;
+  background: green;
+  text-align: center;
+}
+
+.circle {
+  display: inline-block;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  width: 30vw;
+  height: 80vh;
+  /*-webkit-border-radius: 25vh;*/
+  /*-moz-border-radius: 25vh;*/
+  /*border-radius: 25vh;*/
+  background: white;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  vertical-align: middle;
+}
+.container {
+    width:95%;
+	height:93%;
+    border:3px solid black;
+    margin: 0 auto;
+    padding:1%;
+}
+.row {
+    height:33%; /*set height*/
+    //border:2px solid blue;
+    width:100%;
+    margin-bottom:0%;
+    padding:1%;
+}
+.col1 {
+    //border:2px solid red;
+	margin:auto;
+	margin-top: 2%;
+    width:30%;
+    height:92%;    
+	text-align: center;
+}
+.col2 {
+    //border:2px solid green;
+    width:45%;
+    float:left;
+    height:92%;
+    margin-right:2%;   
+	text-align: center; 
+}
+.col2:last-child {margin-right:0;  }
+.col3 {
+    //border:2px solid brown;
+    width:33%;
+    float:left;
+    height:92%;
+    //margin-right:1%;   
+	margin: 0;
+	//min-width: 30%;
+	text-align: center;
+}
+.col3:last-child {margin-right:0;  }
+
+.image {
+	//border: 2px solid;
+	max-height:100%;
+	max-width:100%;
+	//display: block /*for the img inside your div */ 
+	//margin: auto;
+	//vertical-align: middle;
+	
+    //-ms-transform: rotate(90deg); /* IE 9 */
+    //-webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    //transform: rotate(90deg);
+}
+
+</style>
+
+</head>
+ 
+<body>
+{% load staticfiles %}
+
+	<div id = "base">
+		<div id = "circle_key" class = "circle">
+			<div id = "cont1" class = "container">
+				<div id = "krow1" class = "row">
+					<div id = "ek1" class = "col3">
+						<img class = "image" id = "img_ek1" />
+					</div>
+					<div id = "ek2" class = "col3">
+						<img class = "image" id = "img_ek2" />
+					</div>
+					<div id = "ek3" class = "col3">
+						<img class = "image" id = "img_ek3" />
+					</div>
+				</div>			
+				<div id = "krow2" class = "row">
+					<div id = "ek4" class = "col3">
+						<img class = "image" id = "img_ek4" />
+					</div>
+					<div id = "ek5" class = "col3">
+						<img class = "image" id = "img_ek5" />
+					</div>
+					<div id = "ek6" class = "col3">
+						<img class = "image" id = "img_ek6" />
+					</div>
+				</div>				
+				<div id = "krow3" class = "row">
+					<div id = "ek7" class = "col3">
+						<img class = "image" id = "img_ek7" />
+					</div>
+					<div id = "ek8" class = "col3">
+						<img class = "image" id = "img_ek8" />
+					</div>
+					<div id = "ek9" class = "col3">
+						<img class = "image" id = "img_ek9" />
+					</div>
+				</div>	
+			</div>
+		</div>
+		<div id = "circle_play" class = "circle">
+			<div id = "cont2" class = "container">
+				<div id = "prow1" class = "row">
+					<div id = "ep1" class = "col3">
+						<img class = "image" id = "img_ep1" onClick="clickFntn(this.id)"/>
+					</div>
+					<div id = "ep2" class = "col3">
+						<img class = "image" id = "img_ep2" onClick="clickFntn(this.id)"/>
+					</div>
+					<div id = "ep3" class = "col3">
+						<img class = "image" id = "img_ep3" onClick="clickFntn(this.id)"/>
+					</div>
+				</div>			
+				<div id = "prow2" class = "row">
+					<div id = "ep4" class = "col3">
+						<img class = "image" id = "img_ep4" onClick="clickFntn(this.id)"/>
+					</div>
+					<div id = "ep5" class = "col3">
+						<img class = "image" id = "img_ep5" onClick="clickFntn(this.id)"/>
+					</div>
+					<div id = "ep6" class = "col3">
+						<img class = "image" id = "img_ep6" onClick="clickFntn(this.id)"/>
+					</div>
+				</div>				
+				<div id = "prow3" class = "row">
+					<div id = "ep7" class = "col3">
+						<img class = "image" id = "img_ep7" onClick="clickFntn(this.id)"/>
+					</div>
+					<div id = "ep8" class = "col3">
+						<img class = "image" id = "img_ep8" onClick="clickFntn(this.id)"/>
+					</div>
+					<div id = "ep9" class = "col3">
+						<img class = "image" id = "img_ep9" onClick="clickFntn(this.id)"/>
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+	
+	
+    <form id="form1"> 
+	{% csrf_token %}
+	</form>
+</body>
+</html>

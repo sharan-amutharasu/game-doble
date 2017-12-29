@@ -1,0 +1,15 @@
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.box {
+    display: inline-block;
+    position: relative;
+    margin: 1%;
+    float: left;
+    width: 23%;
+    height: 400px;
+    background-color: lightgrey;
+}

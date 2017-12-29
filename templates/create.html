@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+ 
+<html>
+<head>
+    <title>Create game</title>
+	
+
+</head>
+ 
+<body>
+    <h1>New post</h1>
+    <form method="POST" class="create-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Create</button>
+    </form>
+    </div>
+ 
+ 
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+ 
+<html>
+<head>
+    <title>Testing FourSquare</title>
+    <link rel="stylesheet" href="square.css" type="text/css" media="screen" />
+	<script>
+	function waitSec(ms){
+	   var start = new Date().getTime();
+	   var end = start;
+	   while(end < start + ms) {
+		 end = new Date().getTime();
+		 document.getElementById("demo").innerHTML = end;
+	  }
+	}
+	function resetFntn() {
+		document.getElementById('topleft').style.backgroundColor = 'grey';
+		document.getElementById('topright').style.backgroundColor = 'grey';
+		document.getElementById('bottomleft').style.backgroundColor = 'grey';
+		document.getElementById('bottomright').style.backgroundColor = 'grey';
+	}
+	function setFntn() {
+		x = Math.random()
+		if (x <= 0.25) {
+			tag = "topleft";
+		} else if (x <= 0.5) {
+			tag = "topright";
+		} else if (x <= 0.75) {
+			tag = "bottomleft";
+		} else if (x > 0.75) {
+			tag = "bottomright";
+		}
+		document.getElementById(tag).style.backgroundColor = 'black';
+		document.getElementById(tag).style.backgroundColor = 'green';
+		
+	}
+	function setFntnTop() {
+		x = Math.random()
+		if (x <= 0.5) {
+			tag = "topleft";
+		} else if (x > 0.5) {
+			tag = "topright";
+		}
+		document.getElementById(tag).style.backgroundColor = 'black';
+		document.getElementById(tag).style.backgroundColor = 'green';
+		
+	}
+	function setFntnBottom() {
+		x = Math.random()
+		if (x <= 0.5) {
+			tag = "bottomleft";
+		} else if (x > 0.5) {
+			tag = "bottomright";
+		}
+		document.getElementById(tag).style.backgroundColor = 'black';
+		document.getElementById(tag).style.backgroundColor = 'green';
+		
+	}
+	window.setInterval(function(){
+		resetFntn()
+		setTimeout(function(){
+			setFntn()
+		}, 500);
+	}, 1000);
+	</script>
+<style>
+ 
+body {
+    width: 660px;
+    background: #252525;
+    display: block;
+    margin: 10px auto;
+}
+#foursquare {
+    background: #F0F0F0;
+    width: 640px;
+    height: auto;
+    margin: auto;
+    padding: 1px;
+    display: block;
+    position: absolute;
+    border-radius: 15px;
+}
+    #topleft {
+        background: #747171;
+        width: 300px;
+        height: 300px;
+        margin: 10px;
+        display: block;
+        float: left;
+        border-radius: 15px;    
+    }
+    #topright {
+        background: #747171;
+        width: 300px;
+        height: 300px;
+        margin: 10px;
+        display: block;
+        float: left;
+        border-radius: 15px;    
+    }
+    #bottomleft {
+        background: #747171;
+        width: 300px;
+        height: 300px;
+        margin: 10px;
+        display: block;
+        float: left;
+        clear: left;
+        border-radius: 15px;    
+    }
+    #bottomright {
+        background: #747171;
+        width: 300px;
+        height: 300px;
+        margin: 10px;
+        display: block;
+        float: left;
+        border-radius: 15px;    
+    }
+ 
+ 
+</style>
+</head>
+ 
+<body>
+    <div id="foursquare">
+        <div id="topleft">
+        </div>
+        <div id="topright">
+        </div>
+        <div id="bottomleft">
+        </div>
+        <div id="bottomright">
+        </div>
+    </div>
+ 
+ 
+ 
+ 
+</body>
+</html>

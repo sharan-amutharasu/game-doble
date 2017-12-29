@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+ 
+<html>
+<head>
+    <title>Wait</title>
+<script>
+
+function page_load() {
+{% autoescape off %}
+	var game_id = {{id}};
+	post("{% url 'game2_play' %}", {type:"first", id:game_id});
+
+{% endautoescape %}
+}
+
+function post(path, params, method) {
+    method = method || "POST"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.getElementById("form1");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}	
+
+window.onload=page_load;
+
+</script>
+<style>
+
+.text{
+text-align: center;
+}
+
+#container {
+  width: 50 vw;
+  height: 50 vh;
+  text-align: center;
+}
+
+.wait{
+max-height:33%;
+max-width:33%;
+}
+
+</style>
+</head>
+ 
+<body>
+    <h1 class = "text">Dealing your Cards:</h1>
+	<div id = "container">
+	<img class = "wait" id = "dealing" src="/static/images/dealing.jpg" />	
+	</div>
+	<p class = "text"><b>Waiting for all players to join the game.</b></p>
+    <form id="form1"> 
+	{% csrf_token %}
+	</form>
+ 
+ 
+</body>
+</html>

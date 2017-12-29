@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+ 
+<html>
+<head>
+    <title>Game over</title>
+	
+
+<script language="javascript">
+
+var gv_set1_counter = 0;
+
+function page_load() {
+{% autoescape off %}
+	{% if p1_time_var > 0 and p2_time_var > 0 %}
+		{% if p1_time_var <= p2_time_var %}
+			document.getElementById("winner").innerHTML = "You are the winner!";
+		{% else %}
+			document.getElementById("winner").innerHTML = "You lose!";
+		{% endif %}
+	{% else %}
+		document.getElementById("winner").innerHTML = "Players still playing. Wait for result.";
+		//cont_checkFntn();
+		//if (gv_set1_counter <= 5) { 
+		//	gv_set1_counter ++;
+		//	setTimeout(cont_checkFntn, 1000);
+		//}
+		//check_times();
+		
+	{% endif %}	
+
+{% endautoescape %}
+}
+
+function cont_checkFntn() {
+{% autoescape off %}
+	var game_id = {{id_var}};
+	post("{% url 'game2_end' %}", {type:"second", id: game_id});
+{% endautoescape %}
+}
+
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.getElementById("form2");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}	
+
+
+
+
+
+//window.onload=page_load;
+</script>
+
+<style>
+
+a.link_create:link{
+  color: green;
+}
+a.link_create:visited{
+  color: red;
+}
+
+</style>
+
+</head>
+ 
+<body>
+    <h1>Game ended</h1>
+	<p>Game id: {{id_var}}</p>
+	{% if result == "win" %}
+		<p><b> Congrats!You are the WINNER! </b>(Time: {{play_time}} seconds)</p>
+		<p>Your opponent still has {{cards_left}} cards left </p>
+	{% else %}
+		<p><b> You lose! </b></p>
+		<p>You still had {{cards_left}} card(s) left </p>
+	{% endif %}	
+	<p><a class = "link_create" href="{% url 'create' %}">New Game</a></p>
+	<p><a class = "link_home" href="{% url 'home' %}">Home</a></p>
+	<form id="form2">
+	{% csrf_token %}
+	</form>
+	<div id="test"></div>
+ 
+ 
+</body>
+</html>
